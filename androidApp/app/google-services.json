@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "215008993746",
+    "firebase_url": "https://responsible-ciitzen.firebaseio.com",
+    "project_id": "responsible-ciitzen",
+    "storage_bucket": "responsible-ciitzen.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215008993746:android:41710e44a2cec8ce5b280b",
+        "android_client_info": {
+          "package_name": "com.kubrom.responsible_ciitzen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215008993746-fkoiahk6ro6jbe3f9i8525b8ic13plq7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kubrom.responsible_ciitzen",
+            "certificate_hash": "18aa194359ff99b648f1eb0a94d6a8dffd8868bf"
+          }
+        },
+        {
+          "client_id": "215008993746-77d2o5d4g3mnm0cs1sna9fg9u3shie4r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBVyADN2Yu0Uo3OdnBscguHrdQDEC078g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "215008993746-77d2o5d4g3mnm0cs1sna9fg9u3shie4r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
