@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import User from './views/User.vue'
+import Dashboard from './views/Dashboard.vue'
 
 Vue.use(Router)
 
@@ -26,6 +27,11 @@ export default new Router({
             path: '/user/:option',
             name: 'user',
             component: User
+        },
+        {
+            path: '/dashboard/:name',
+            name: 'dashboard',
+            component: Dashboard
         },
     ]
 })

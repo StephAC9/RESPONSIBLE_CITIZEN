@@ -5,36 +5,20 @@
       color="primary"
       dark
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
+      <div class="d-flex align-center logo">
+        RESPONSIBLE CITIZEN
       </div>
 
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      <div v-if="!success_login">
+        <v-btn depressed small style="margin-right:5px">
+          <span class="mr-2">SignUp</span>
+        </v-btn>
+        <v-btn depressed small>
+            <span class="mr-2">SignIn</span>
+        </v-btn>
+      </div>
     </v-app-bar>
 
     <v-content>
@@ -44,12 +28,30 @@
 </template>
 
 <script>
-
+import {mapGetters} from 'vuex'
 export default {
   name: 'App',
 
   data: () => ({
     //
   }),
+  computed:{
+    ...mapGetters(['success_login']),
+  },
+
+  watch:{
+    success_login: {
+            handler: function(newValue) {
+                console.log("New age: " + newValue)
+            },
+            deep: true,
+            immediate: true
+        }
+  }
 };
 </script>
+<style  scoped>
+  .logo{
+    font-weight: bold;
+  }
+</style>
