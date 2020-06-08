@@ -44,8 +44,15 @@
                             label="Email"
                             name="email"
                             prepend-icon="mdi-account"
-                            type="text"
+                            type="email"
                             v-model="email"
+                        ></v-text-field>
+                        <v-text-field
+                            label="Phone number"
+                            name="phone"
+                            prepend-icon="mdi-account"
+                            type="text"
+                            v-model="phoneNumber"
                         ></v-text-field>
 
                         <v-text-field
@@ -107,7 +114,8 @@ export default {
       return{
         firstName:null, 
         lastName:null, 
-        email:null, 
+        email:null,
+        phoneNumber:null,  
         password:null,
         chosenAuthority:null,    
         items: [
@@ -126,7 +134,7 @@ export default {
 
 
       signUp(){
-          this.$store.dispatch('signUp',{firstName:this.firstName,lastName:this.lastName,email:this.email,password:this.password,authority:this.chosenAuthority})
+          this.$store.dispatch('signUp',{firstName:this.firstName,lastName:this.lastName,email:this.email,phoneNumber:this.phoneNumber,password:this.password,authority:this.chosenAuthority})
       }
     }
 }

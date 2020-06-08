@@ -31,6 +31,7 @@
                             name="email"
                             prepend-icon="mdi-account"
                             type="text"
+                            v-model="email"
                         ></v-text-field>
 
                         <v-text-field
@@ -39,6 +40,7 @@
                             name="password"
                             prepend-icon="mdi-lock"
                             type="password"
+                            v-model="password"
                         ></v-text-field>
                         </v-form>
                     </v-card-text>

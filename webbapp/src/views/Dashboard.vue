@@ -1,12 +1,14 @@
 <template>
     <div class="dashbaord-container">
-        <div class="items">
-            <DataItem style="margin-bottom:20px" v-for="(num, index) in numbers" :key="index"></DataItem>
+        <div class="items" v-for="(item, index) in data" :key="index">
+            <DataItem  :item="item"></DataItem>
+            <!-- <DataItem  style="margin-bottom:20px" v-for="(num, index) in numbers" :key="index"></DataItem> -->
         </div>
     </div>
 </template>
 <script>
 import DataItem from '../components/items/DataItem'
+import {mapGetters} from 'vuex'
 export default {
     name:'Dashboard',
     components:{
@@ -18,7 +20,19 @@ export default {
         }
     },
     computed:{
+        ...mapGetters(['data'])
     },
+    beforeCreate(){
+        this.$store.dispatch('fetchData')
+    },
+
+    watch:{
+        data(v){
+            if(v !== null || v !== undefined){
+                console.log(this.data)
+            }
+        }
+    }
 }
 </script>
 <style  scoped>
