@@ -1,7 +1,7 @@
 <template>
   <div class="home-container">
     <div style="text-align: center; margin-top:100px;margin-bottom:50px">
-        <h2>Select the authority you would like to connect with please!</h2>
+        <h2>Select the authority you would like to connect with before signing in please!</h2>
     </div>  
     <div class="element">
       <v-row justify="space-around">

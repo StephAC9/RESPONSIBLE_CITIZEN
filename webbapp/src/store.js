@@ -29,13 +29,35 @@ export default new Vuex.Store({
         },
         signUp({ commit }, payload) {
             commit('SET_AUTHORITY', payload.authority.toLowerCase())
+            console.log('sign-up details: ', payload)
             router.push({ name: 'user', params: { option: 'login' } })
+                .catch(error => {
+                    if (error.name != "NavigationDuplicated") {
+                        throw error;
+                    }
+                });
         },
         signIn({ commit }, payload) {
             commit('SUCCESS_LOGIN', true)
             setTimeout(() => {
                 router.push({ name: 'dashboard', params: { name: payload.authority } })
+                    .catch(error => {
+                        if (error.name != "NavigationDuplicated") {
+                            throw error;
+                        }
+                    });
             }, 1500);
+        },
+        signOut({ commit }) {
+            router.push('/home')
+                .catch(error => {
+                    console.log(error)
+                    if (error.name != "NavigationDuplicated") {
+                        throw error;
+                    }
+                })
+            commit('SUCCESS_LOGIN', false)
+            commit('SET_AUTHORITY', null)
         }
 
     }

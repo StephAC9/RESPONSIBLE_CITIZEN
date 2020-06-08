@@ -17,8 +17,8 @@ export default {
             numbers:[1,2,3,4,5,6]
         }
     },
-     computed:{
-  },
+    computed:{
+    },
 }
 </script>
 <style  scoped>

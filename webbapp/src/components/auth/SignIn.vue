@@ -27,8 +27,8 @@
                     <v-card-text>
                         <v-form>
                         <v-text-field
-                            label="Login"
-                            name="login"
+                            label="Email"
+                            name="email"
                             prepend-icon="mdi-account"
                             type="text"
                         ></v-text-field>
@@ -60,7 +60,8 @@ export default {
     name:'SignIn',
     data(){
         return{
-
+            email:null,
+            password:null
         }
     },
     computed:{
@@ -68,8 +69,7 @@ export default {
     },
     methods:{
         login(){
-            //this.$router.push({name: 'dashboard',params:{name: this.authority}})
-            this.$store.dispatch('signIn',{authority:this.authority})
+            this.$store.dispatch('signIn',{email:this.email,password:this.password,authority:this.authority})
         }
     }
 

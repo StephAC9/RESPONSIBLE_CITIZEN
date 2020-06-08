@@ -1,34 +1,6 @@
 <template>
   <div class="home-container">
-    <div class="element">
-      <v-row justify="space-around">
-        <v-menu
-          bottom
-          origin="center center"
-          transition="scale-transition"
-        >
-          <template v-slot:activator="{ on }">
-            <v-btn
-              color="primary"
-              dark
-              v-on="on"
-            >
-              Choose authority
-            </v-btn>
-          </template>
-
-          <v-list>
-            <v-list-item
-              v-for="(item, i) in items"
-              :key="i"
-              @click="getAuthority(item.authority)"
-            >
-              <v-list-item-title>{{ item.authority }}</v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-      </v-row>
-    </div>
+    <h1>HOME PAGE</h1>
   </div>
 </template>
 
@@ -38,18 +10,11 @@
     name: 'Home',
     data(){
       return{
-        items: [
-        { authority: 'POLICE' },
-        { authority: 'SKATTEVERKET' },
-        { authority: 'KOMMUN' },
-        { authority: 'MIGRATIONVERKET' },
-      ],
+       
       }
     },
     methods:{
-      getAuthority(authority){
-        console.log(authority)
-      }
+     
     }
   }
 </script>

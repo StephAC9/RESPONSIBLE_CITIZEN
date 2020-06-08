@@ -31,18 +31,21 @@
                             name="firstname"
                             prepend-icon="mdi-account"
                             type="text"
+                            v-model="firstName"
                         ></v-text-field>
                         <v-text-field
                             label="Lastname"
                             name="lastname"
                             prepend-icon="mdi-account"
                             type="text"
+                            v-model="lastName"
                         ></v-text-field>    
                         <v-text-field
                             label="Email"
                             name="email"
                             prepend-icon="mdi-account"
                             type="text"
+                            v-model="email"
                         ></v-text-field>
 
                         <v-text-field
@@ -51,6 +54,7 @@
                             name="password"
                             prepend-icon="mdi-lock"
                             type="password"
+                            v-model="password"
                         ></v-text-field>
                         <v-row justify="space-around">
                             <v-menu
@@ -77,13 +81,16 @@
                                 <v-list-item-title>{{ item.authority }}</v-list-item-title>
                                 </v-list-item>
                             </v-list>
-                            </v-menu>
+                            </v-menu><hr>
+                            <div style="padding-left:10px">
+                                <v-text-field v-model="chosenAuthority"></v-text-field>
+                            </div>
                         </v-row>
                         </v-form>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="primary">Sign up</v-btn>
+                        <v-btn @click="signUp" color="primary">Sign up</v-btn>
                     </v-card-actions>
                     </v-card>
                 </v-col>
@@ -98,6 +105,11 @@ export default {
     name:'SignUp',
     data(){
       return{
+        firstName:null, 
+        lastName:null, 
+        email:null, 
+        password:null,
+        chosenAuthority:null,    
         items: [
         { authority: 'POLICE' },
         { authority: 'SKATTEVERKET' },
@@ -108,8 +120,13 @@ export default {
     },
     methods:{
       getAuthority(authority){
-        console.log(authority)
-        this.$router.push({name:'user',params:{option:'login'}})
+          this.chosenAuthority = authority
+          console.log(this.chosenAuthority)
+      },
+
+
+      signUp(){
+          this.$store.dispatch('signUp',{firstName:this.firstName,lastName:this.lastName,email:this.email,password:this.password,authority:this.chosenAuthority})
       }
     }
 }

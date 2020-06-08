@@ -14,6 +14,7 @@
       <v-btn
         color="orange"
         text
+        @click="viewData()"
       >
         Explore
       </v-btn>
@@ -22,6 +23,14 @@
 </template>
 <script>
 export default {
-    name:'DataItem'
+    name:'DataItem',
+    data:()=>({
+
+    }),
+    methods:{
+        viewData(){
+          this.$router.push({name:'dataview'})
+        }
+    }
 }
 </script>
