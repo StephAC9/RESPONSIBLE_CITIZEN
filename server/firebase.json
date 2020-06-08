@@ -1,0 +1,8 @@
+{
+  "database": {
+    "rules": "database.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  }
+}

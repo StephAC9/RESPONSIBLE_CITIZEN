@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Responsible-ciitzen</string>
+   <!-- <string name="google_maps_key">AIzaSyCBOOF7OzafAfFWwI2WsrEGTanashSHzNA</string>-->
+    <string name="google_maps_key">AIzaSyCzsVQVKX0WUo3EgOrwlE4bO7UZh2-b-f4</string>
+    <string-array name="brew_array">
+        <item>Police</item>
+        <item>Skatteverket</item>
+        <item>Mocha</item>
+        <item>Caffè Americano</item>
+        <item>Cafe Zorro</item>
+    </string-array>
+</resources>
