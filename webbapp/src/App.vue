@@ -12,10 +12,10 @@
       <v-spacer></v-spacer>
 
       <div v-if="!success_login">
-        <v-btn depressed small style="margin-right:5px">
+        <v-btn @click="signUp" depressed small style="margin-right:5px">
           <span class="mr-2">SignUp</span>
         </v-btn>
-        <v-btn depressed small>
+        <v-btn @click="chooseAuthority" depressed small>
             <span class="mr-2">SignIn</span>
         </v-btn>
       </div>
@@ -37,6 +37,14 @@ export default {
   }),
   computed:{
     ...mapGetters(['success_login']),
+  },
+  methods:{
+    chooseAuthority(){
+      this.$router.push({name:'user',params:{option:'authority'}})
+    },
+    signUp(){
+      this.$store.dispatch('signUp')
+    }
   },
 
   watch:{

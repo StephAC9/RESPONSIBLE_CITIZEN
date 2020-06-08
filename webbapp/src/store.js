@@ -27,7 +27,7 @@ export default new Vuex.Store({
         setAuthority({ commit }, payload) {
             commit('SET_AUTHORITY', payload.authority.toLowerCase())
         },
-        signIUp({ commit }, payload) {
+        signUp({ commit }, payload) {
             commit('SET_AUTHORITY', payload.authority.toLowerCase())
             router.push({ name: 'user', params: { option: 'login' } })
         },
