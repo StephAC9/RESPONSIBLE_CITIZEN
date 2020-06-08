@@ -1,5 +1,8 @@
 <template>
   <div class="home-container">
+    <div style="text-align: center; margin-top:100px;margin-bottom:50px">
+        <h2>Select the authority you would like to connect with please!</h2>
+    </div>  
     <div class="element">
       <v-row justify="space-around">
         <v-menu
@@ -49,6 +52,8 @@
     methods:{
       getAuthority(authority){
         console.log(authority)
+        this.$store.dispatch('setAuthority',{authority:authority})
+        this.$router.push({name:'user',params:{option:'login'}})
       }
     }
   }
