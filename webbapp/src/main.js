@@ -4,8 +4,10 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 import firebase from 'firebase'
+import VueFirestore from 'vue-firestore'
 
 Vue.config.productionTip = false
+Vue.use(VueFirestore)
 
 new Vue({
         el: '#app',

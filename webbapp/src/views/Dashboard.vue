@@ -20,10 +20,10 @@ export default {
         }
     },
     computed:{
-        ...mapGetters(['data'])
+        ...mapGetters(['data','dataItem'])
     },
     beforeCreate(){
-        this.$store.dispatch('fetchData')
+       // this.$store.dispatch('fetchData',{dataItem:this.dataItem})
     },
 
     watch:{

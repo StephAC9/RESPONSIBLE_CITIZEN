@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         authoritySpinner = findViewById(R.id.authority);
         progressDialog = new ProgressDialog(MainActivity.this);// context name as per your project name
 
-        String[] items = new String[]{"Police", "Library", "Skatteverket", "Kommun"};
+        String[] items = new String[]{"POLICE", "SKATTEVERKET", "TRAFFIKVERKET", "KOMMUN","MIGRATIONSVERKET"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, items);

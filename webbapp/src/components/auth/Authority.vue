@@ -45,7 +45,8 @@
         { authority: 'POLICE' },
         { authority: 'SKATTEVERKET' },
         { authority: 'KOMMUN' },
-        { authority: 'MIGRATIONVERKET' },
+        { authority: 'MIGRATIONSVERKET' },
+        { authority: 'TRAFFIKVERKET' }
       ],
       }
     },

@@ -4,6 +4,7 @@ import router from './router'
 import firebase from 'firebase'
 import createPersistedState from 'vuex-persistedstate'
 import axios from 'axios'
+require('firebase/firestore')
 
 Vue.use(Vuex)
 
@@ -15,19 +16,22 @@ export default new Vuex.Store({
         authority: null,
         success_login: false,
         data: [],
-        dataItem: null
+        dataItem: null,
+        userId: null
     },
     getters: {
         authority: state => state.authority,
         success_login: state => state.success_login,
         data: state => state.data,
-        dataItem: state => state.dataItem
+        dataItem: state => state.dataItem,
+        userId: state => state.userId
     },
     mutations: {
         SET_AUTHORITY: (state, payload) => state.authority = payload,
         SUCCESS_LOGIN: (state, payload) => state.success_login = payload,
         SET_DATA: (state, payload) => state.data = payload,
-        SET_DATA_ITEM: (state, payload) => state.dataItem = payload
+        SET_DATA_ITEM: (state, payload) => state.dataItem = payload,
+        SET_USER_ID: (state, payload) => state.userId = payload
     },
     actions: {
         setAuthority({ commit }, payload) {
@@ -36,49 +40,102 @@ export default new Vuex.Store({
         async signUp({ commit }, payload) {
             commit('SET_AUTHORITY', payload.authority.toLowerCase())
             console.log('sign-up details: ', payload)
-            await firebase.auth()
-                .createUserWithEmailAndPassword(payload.email, payload.password)
-                .then(data => {
-                    data.user
-                        .updateProfile({
-                            displayName: payload.firstName + ' ' + payload.lastName,
+            await firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
+                .then(registeredUser => {
+                    firebase.firestore().collection('Users')
+                        .add({
+                            uid: registeredUser.user.uid,
+                            userName: payload.firstName + ' ' + payload.lastName,
                             phoneNumber: payload.phoneNumber,
                             authority: payload.authority
                         })
-                        .then((res) => {
-                            console.log(res)
-                        }).catch(err => {
-                            console.log(err)
-                        })
-                })
-                .catch(err => {
-                    this.error = err.message;
-                })
-            router.push({ name: 'user', params: { option: 'login' } })
-                .catch(error => {
-                    if (error.name != "NavigationDuplicated") {
-                        throw error;
-                    }
-                });
-        },
-        async signIn({ commit }, payload) {
-
-            await firebase
-                .auth()
-                .signInWithEmailAndPassword(payload.email, payload.password)
-                .then(data => {
-                    commit('SUCCESS_LOGIN', true)
-                    console.log(data)
-                    router.push({ name: 'dashboard', params: { name: payload.authority } })
+                    router.push({ name: 'user', params: { option: 'login' } })
                         .catch(error => {
                             if (error.name != "NavigationDuplicated") {
                                 throw error;
                             }
-                        });
+                        })
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+
+        async signIn({ commit }, payload) {
+            var userId = null
+                //var users = null
+
+            await firebase
+                .auth()
+                .signInWithEmailAndPassword(payload.email, payload.password) // signed in
+                .then(data => {
+                    commit('SUCCESS_LOGIN', true)
+                    userId = data.user.uid
+                    console.log(userId)
+                    commit('SET_USER_ID', userId)
                 })
                 .catch(err => {
                     this.error = err.message;
                     commit('SUCCESS_LOGIN', false)
+                })
+            await axios.get('https://us-central1-responsible-ciitzen.cloudfunctions.net/GetUsers')
+                .then(res => {
+                    const users = res.data
+                    console.log(users)
+                    users.forEach(element => {
+                        if (element.uid === userId) {
+                            console.log(element)
+                            commit('SET_AUTHORITY', element.authority)
+                            switch (element.authority.toUpperCase()) {
+                                case 'POLICE':
+                                    axios.get('https://us-central1-responsible-ciitzen.cloudfunctions.net/GetPoliceImages')
+                                        .then(res => {
+                                            console.log(res)
+                                            commit('SET_DATA', res.data)
+                                        })
+                                    break;
+                                case 'SKATTEVERKET':
+                                    axios.get('https://us-central1-responsible-ciitzen.cloudfunctions.net/GetSkatteverketImages')
+                                        .then(res => {
+                                            console.log(res)
+                                            commit('SET_DATA', res.data)
+                                        })
+                                    break;
+                                case 'KOMMUN':
+                                    axios.get('https://us-central1-responsible-ciitzen.cloudfunctions.net/GetMunicipalityImages')
+                                        .then(res => {
+                                            //console.log(res)
+                                            commit('SET_DATA', res.data)
+                                        })
+                                    break;
+                                case 'MIGRATIONSVERKET':
+                                    axios.get('https://us-central1-responsible-ciitzen.cloudfunctions.net/GetMigrationImages')
+                                        .then(res => {
+                                            console.log(res)
+                                            commit('SET_DATA', res.data)
+                                        })
+                                    break;
+                                case 'TRAFFIKVERKET':
+                                    axios.get('https://us-central1-responsible-ciitzen.cloudfunctions.net/GetTraffikImages')
+                                        .then(res => {
+                                            console.log(res)
+                                            commit('SET_DATA', res.data)
+                                        })
+                                    break;
+                                default:
+                                    break;
+                            }
+                            router.push({ name: 'dashboard', params: { name: element.authority.toLowerCase() } })
+                                .catch(error => {
+                                    if (error.name != "NavigationDuplicated") {
+                                        throw error;
+                                    }
+                                })
+                        }
+                    })
+                })
+                .catch(err => {
+                    console.log(err)
                 })
         },
         signOut({ commit }) {
