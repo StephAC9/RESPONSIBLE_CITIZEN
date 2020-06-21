@@ -1,0 +1,3 @@
+//rootProject.name='Responsible-ciitzen'
+rootProject.name='ResponsibleCitizen'
+include ':app'
