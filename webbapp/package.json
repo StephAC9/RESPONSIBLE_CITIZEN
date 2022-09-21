@@ -14,7 +14,7 @@
     "vue": "^2.6.10",
     "vue-firestore": "^0.3.30",
     "vue-router": "^3.0.3",
-    "vuetify": "^2.2.11",
+    "vuetify": "^2.6.10",
     "vuex": "^3.0.1",
     "vuex-persistedstate": "^3.0.1"
   },
